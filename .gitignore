@@ -3,6 +3,7 @@
 !.gitignore
 !.prettierrc
 !bun.lock
+!bunfig.toml
 !eslint.config.mjs
 !package.json
 !tsconfig.json
