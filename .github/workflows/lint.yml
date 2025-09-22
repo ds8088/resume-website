@@ -1,0 +1,37 @@
+name: Lint
+
+on:
+  workflow_call:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+    paths-ignore:
+      - '**.md'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Lint package
+        run: bun run lint
