@@ -48,6 +48,19 @@ export class ResumeFooter extends LocalizableElement(CoreElement(styles)) {
                     </div>
                 </cel-tooltip>
 
+                <a
+                    class="footer__middle"
+                    href="https://github.com/ds8088/resume-website"
+                    rel="noreferrer noopener external"
+                    target="_blank"
+                >
+                    <cel-svg symbol="github" alt="GitHub" size="20"></cel-svg>
+                    ${this.localize({
+                        en: 'Website repository',
+                        ru: 'Репозиторий сайта',
+                    })}
+                </a>
+
                 <span class="footer__right">
                     ${this.localize({
                         en: 'Tech stack',
