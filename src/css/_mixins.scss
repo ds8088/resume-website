@@ -1,0 +1,196 @@
+@use 'vars' as *;
+
+@use 'sass:string';
+@use 'sass:list';
+
+@mixin sm {
+    @media screen and (max-width: #{$sm-breakpoint - 0.02}px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media screen and (min-width: #{$sm-breakpoint}px) and (max-width: #{$md-breakpoint - 0.02}px) {
+        @content;
+    }
+}
+
+@mixin md-and-down {
+    @media screen and (max-width: #{$md-breakpoint - 0.02}px) {
+        @content;
+    }
+}
+
+@mixin md-and-up {
+    @media screen and (min-width: #{$sm-breakpoint}px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media screen and (min-width: #{$md-breakpoint}px) {
+        @content;
+    }
+}
+
+@mixin sm-prop($property, $value) {
+    @include sm {
+        #{$property}: $value;
+    }
+}
+
+@mixin md-prop($property, $value) {
+    @include md {
+        #{$property}: $value;
+    }
+}
+
+@mixin lg-prop($property, $value) {
+    @include lg {
+        #{$property}: $value;
+    }
+}
+
+@mixin responsive($property, $lg, $md, $sm) {
+    #{$property}: $lg;
+
+    @include md {
+        #{$property}: $md;
+    }
+
+    @include sm {
+        #{$property}: $sm;
+    }
+}
+
+@mixin font-variable($name, $path, $weights: 100 900, $range...) {
+    $unicode-range: null;
+
+    @each $r in $range {
+        $unicode-range: list.append($unicode-range, $r, comma);
+    }
+
+    @font-face {
+        font-family: string.quote($name);
+        font-style: normal;
+        font-weight: $weights;
+        font-display: swap;
+        font-optical-sizing: auto;
+        src: url(#{string.quote($path)}) format(string.quote('woff2-variations'));
+        unicode-range: $unicode-range;
+    }
+}
+
+@mixin transition($prop, $time: 0.2s, $easing: ease-out, $delay: 0s) {
+    $transition: ();
+
+    @for $i from 1 through list.length($prop) {
+        @for $j from 0 to (list.length($prop)) - (list.length($time)) {
+            $time: list.join($time, list.nth($time, -1));
+        }
+        @for $j from 0 to (list.length($prop)) - (list.length($easing)) {
+            $easing: list.join($easing, list.nth($easing, -1));
+        }
+        @for $j from 0 to (list.length($prop)) - (list.length($delay)) {
+            $delay: list.join($delay, list.nth($delay, -1));
+        }
+
+        $transition: list.append(
+            $transition,
+            (list.nth($prop, $i) list.nth($time, $i) list.nth($easing, $i) list.nth($delay, $i)),
+            $separator: comma
+        );
+    }
+
+    transition: $transition;
+}
+
+@mixin transition-discrete($prop, $time: 0.2s, $easing: ease-out, $delay: 0s) {
+    $transition: ();
+
+    @for $i from 1 through list.length($prop) {
+        @for $j from 0 to (list.length($prop)) - (list.length($time)) {
+            $time: list.join($time, list.nth($time, -1));
+        }
+        @for $j from 0 to (list.length($prop)) - (list.length($easing)) {
+            $easing: list.join($easing, list.nth($easing, -1));
+        }
+        @for $j from 0 to (list.length($prop)) - (list.length($delay)) {
+            $delay: list.join($delay, list.nth($delay, -1));
+        }
+
+        $transition: list.append(
+            $transition,
+            (list.nth($prop, $i) list.nth($time, $i) list.nth($easing, $i) list.nth($delay, $i) allow-discrete),
+            $separator: comma
+        );
+    }
+
+    transition: $transition;
+}
+
+@mixin ellipsis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+    display: -webkit-box;
+    line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin scroll() {
+    @supports selector(::-webkit-scrollbar) {
+        &::-webkit-scrollbar {
+            width: 1rem;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+            margin-block: 0.5rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 0.3125rem solid transparent;
+            background-clip: padding-box;
+            background-color: var(--color-primary);
+            border-radius: 1rem;
+            min-height: 1.25rem;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-primary-accent);
+        }
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) transparent;
+    }
+}
+
+@mixin starting-style {
+    @starting-style {
+        @content;
+    }
+}
+
+@mixin outline($offset: 0) {
+    outline: 0.125rem solid transparent;
+    outline-offset: $offset;
+
+    @include transition(outline-color);
+
+    &:focus-visible {
+        outline-color: var(--color-outline);
+    }
+}
+
+@mixin darkmode {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}

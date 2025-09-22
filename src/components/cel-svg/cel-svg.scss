@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.svg {
+    user-select: none;
+    flex-shrink: 0;
+    --icon-size: 24px;
+
+    min-width: var(--icon-size);
+    min-height: var(--icon-size);
+    max-width: var(--icon-size);
+    max-height: var(--icon-size);
+}

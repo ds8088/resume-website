@@ -1,0 +1,47 @@
+.button {
+    display: block;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.25;
+    width: 100%;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    --button-color: var(--color-primary);
+
+    @include outline();
+
+    &:hover,
+    &:active {
+        --button-color: var(--color-primary-accent);
+    }
+
+    &:where(:not(.button_passthru)) {
+        user-select: none;
+        background-color: var(--button-color);
+        color: var(--color-background);
+        padding: 0.75rem 1.25rem;
+        border-radius: 1.25rem;
+        border: 0.125rem solid var(--button-color);
+
+        @include transition(background-color border-color outline);
+    }
+
+    &_outline {
+        background-color: transparent;
+        color: var(--color-accent);
+
+        &:hover {
+            background-color: transparent;
+        }
+    }
+
+    &__label {
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: currentColor;
+    }
+}

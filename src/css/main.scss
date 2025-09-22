@@ -1,0 +1,55 @@
+@use 'vars' as *;
+@use 'mixins' as *;
+
+@use 'fonts' as *;
+@use 'colors' as *;
+@use 'reset' as *;
+
+:root {
+    font-family: $font-roboto;
+    font-size: 16px;
+    line-height: 1.375;
+
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+
+    background-color: var(--color-background);
+
+    @include sm {
+        font-size: 14px;
+    }
+}
+
+html {
+    @supports selector(::-webkit-scrollbar) {
+        &::-webkit-scrollbar {
+            width: 1rem;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 0.25rem solid transparent;
+            background-clip: padding-box;
+            background-color: var(--color-primary);
+            border-radius: 1rem;
+            min-height: 1.25rem;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-primary-accent);
+        }
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) transparent;
+    }
+}
+
+body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+}

@@ -1,0 +1,75 @@
+.modal {
+    --modal-extra-height: 0;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-radius: 1.25rem;
+    max-width: 90dvw;
+    border: 0.0625rem solid var(--color-border);
+    outline: none;
+    position: fixed;
+    padding: 0;
+    min-height: 3rem;
+    max-height: max(3rem, calc(100% - 3rem - var(--modal-extra-height)));
+    overscroll-behavior: contain;
+    opacity: 0;
+
+    @include transition-discrete(display overlay opacity);
+    @include scroll();
+
+    &[open] {
+        opacity: 1;
+
+        @include starting-style {
+            opacity: 0;
+        }
+    }
+
+    &::backdrop {
+        background-color: transparent;
+    }
+
+    &_overlay {
+        &::backdrop {
+            background-color: var(--color-modal-backdrop);
+            opacity: 0;
+
+            @include transition-discrete(display overlay opacity);
+        }
+
+        &[open]::backdrop {
+            opacity: 0.3;
+
+            @include starting-style {
+                opacity: 0;
+            }
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 0.75rem;
+        right: 1rem;
+
+        &::part(button) {
+            --button-color: var(--color-modal-close-inactive);
+
+            &:hover {
+                --button-color: var(--color-modal-close-active);
+            }
+        }
+
+        &-icon {
+            color: var(--button-color);
+
+            @include transition(color);
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+    }
+}

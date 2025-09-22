@@ -1,0 +1,24 @@
+:host {
+    padding: 0 var(--page-padding);
+}
+
+.workplaces {
+    display: flex;
+    flex-direction: column;
+
+    .workplace {
+        padding: 1.25rem 0;
+
+        &:not(:last-child) {
+            border-bottom: 0.0625rem dashed oklch(from var(--color-border) calc(l - 0.2 * var(--lightness-dir)) c h / alpha);
+        }
+
+        &:first-child {
+            padding-top: 0.5rem;
+        }
+
+        &:last-child {
+            padding-bottom: 0.5rem;
+        }
+    }
+}

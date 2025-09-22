@@ -1,0 +1,104 @@
+@use 'sanitize' as *;
+@use 'vars' as *;
+@use 'mixins' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-montserrat;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5,
+h6 {
+    font-size: 1rem;
+}
+
+ul,
+ol {
+    list-style-type: none;
+}
+
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+    color: inherit;
+    font-style: inherit;
+}
+
+picture,
+img {
+    user-select: none;
+}
+
+address {
+    font-style: normal;
+}
+
+picture > img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-link);
+
+    @include outline(0.0625rem);
+
+    &:visited {
+        color: var(--color-link);
+    }
+
+    &[data-passthru] {
+        color: unset;
+    }
+}
+
+hr {
+    box-sizing: border-box;
+    overflow: initial;
+    margin: 0;
+    border: none;
+}

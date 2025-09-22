@@ -1,0 +1,37 @@
+:host {
+    padding: 0 var(--page-padding);
+}
+
+.contacts {
+    display: contents;
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem 2rem;
+        max-width: min(100%, 700px);
+
+        @include sm {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+    }
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &__icon {
+        margin-right: 0.25rem;
+    }
+
+    &__link {
+        color: var(--color-link);
+    }
+
+    &__tooltip {
+        display: flex;
+    }
+}

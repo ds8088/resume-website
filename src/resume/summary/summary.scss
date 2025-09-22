@@ -1,0 +1,41 @@
+:host {
+    padding: 0 var(--page-padding);
+}
+
+.skills {
+    &__title {
+        font-weight: 600;
+    }
+}
+
+.skill {
+    display: inline;
+    line-height: 1.875;
+
+    &:not(:nth-last-child(-n + 2)) {
+        margin-right: 0.125rem;
+    }
+
+    > * {
+        vertical-align: middle;
+    }
+
+    &__icon {
+        margin-right: 0.375rem;
+    }
+
+    &__more {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+    }
+
+    &__inner {
+        display: inline-flex;
+        align-items: center;
+
+        &_link {
+            color: var(--color-link);
+        }
+    }
+}

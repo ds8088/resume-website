@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    min-height: 100dvh;
+
+    --page-min-padding: 2rem;
+    --page-width: min(1200px, 90dvw);
+    --page-padding: max(calc((100dvw - var(--page-width)) / 2), var(--page-min-padding));
+
+    @include sm {
+        --page-min-padding: 1rem;
+    }
+}
+
+.app {
+    &__lower {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+}

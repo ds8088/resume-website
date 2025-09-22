@@ -1,0 +1,156 @@
+:host {
+    padding: 0 var(--page-padding);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 2rem;
+
+    @include sm {
+        padding-top: 1.5rem;
+    }
+
+    &__upper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        gap: 2rem;
+
+        @include sm {
+            gap: 1rem;
+        }
+    }
+
+    &__languages {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        user-select: none;
+    }
+
+    &__language {
+        display: contents;
+
+        &-contents {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        &-button {
+            display: flex;
+
+            &::part(button) {
+                background-color: var(--color-secondary);
+                border-radius: 0.5rem;
+                padding: 0.125rem 0.5rem;
+
+                @include transition(background-color outline);
+            }
+        }
+
+        &_active {
+            .header__language-button::part(button) {
+                background-color: var(--color-secondary-accent);
+            }
+        }
+    }
+
+    &__name {
+        font-size: 2rem;
+
+        @include sm {
+            font-size: 1.75rem;
+        }
+    }
+
+    &__description {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    &__titles {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+}
+
+.titles {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.title {
+    min-width: 0;
+
+    &__checkbox {
+        font-size: 1rem;
+        font-family: $font-roboto;
+
+        @include transition(opacity);
+
+        &::part(label) {
+            min-height: 2rem;
+            border-radius: 1.5rem;
+            background-color: var(--color-secondary);
+            padding: 0.25rem 0.75rem;
+            box-shadow: 0.0625rem 0.0625rem 0.1875rem oklch(from var(--color-shadow) l c h / calc(alpha - 0.3));
+
+            @include transition(background-color color box-shadow);
+        }
+
+        &::part(checkbox) {
+            appearance: none;
+            height: 0.75rem;
+            width: 0.75rem;
+            flex-shrink: 0;
+            border-radius: 0.75rem;
+            border: 0.0625rem solid var(--color-primary);
+            background-color: var(--color-tertiary);
+            outline: 0.125rem solid transparent;
+
+            @include transition(border-color background-color outline-color);
+
+            &:focus-visible {
+                outline-color: var(--color-outline);
+            }
+        }
+
+        &[value] {
+            &::part(label) {
+                background-color: var(--color-secondary-accent);
+                box-shadow: 0.125rem 0.125rem 0.25rem oklch(from var(--color-shadow) l c h / calc(alpha - 0.15));
+            }
+
+            &::part(checkbox) {
+                background-color: var(--color-tertiary-accent);
+                border-color: var(--color-tertiary-accent);
+            }
+        }
+
+        &_darken {
+            opacity: 0.75;
+
+            &::part(label) {
+                box-shadow: 0.0625rem 0.0625rem 0.1875rem oklch(from var(--color-shadow) l c h / calc(alpha - 0.5));
+                color: oklch(from var(--color-text) calc(l + 0.2 * var(--lightness-dir)) c h / alpha);
+            }
+        }
+    }
+
+    &__text {
+        font-weight: 500;
+        user-select: none;
+
+        @include sm {
+            @include ellipsis;
+        }
+    }
+}

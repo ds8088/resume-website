@@ -1,0 +1,59 @@
+.tooltip {
+    --tooltip-transition-duration-coalesced: var(--tooltip-transition-duration, 0.3s);
+
+    background-color: var(--color-background);
+    padding: 0.25rem 0.5rem;
+    border: 0.0625rem solid var(--color-border);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: normal;
+    box-shadow: 0.125rem 0.125rem 0.25rem -0.125rem var(--color-shadow);
+    position: fixed;
+    max-width: var(--page-width);
+    width: max-content;
+    margin: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    outline: 0.125rem solid transparent;
+
+    top: 0;
+    left: 0;
+    will-change: top, left, opacity, visibility;
+
+    @include transition-discrete(
+        opacity visibility display overlay outline-color,
+        var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
+            var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
+            var(--tooltip-transition-duration-coalesced)
+    );
+
+    &:focus-within {
+        outline-color: var(--color-outline);
+    }
+
+    &_active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &_simple {
+        max-width: min(400px, var(--page-width));
+    }
+
+    &__parent {
+        display: inline-flex;
+        cursor: help;
+
+        @include outline(0.0625rem);
+
+        &_underline {
+            text-decoration-style: dashed;
+            text-decoration-line: underline;
+            text-decoration-skip-ink: none;
+            text-underline-position: under;
+            text-decoration-thickness: 0.0625rem;
+            text-decoration-color: var(--color-tooltip-underline);
+        }
+    }
+}

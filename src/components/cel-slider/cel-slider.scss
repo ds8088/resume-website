@@ -1,0 +1,89 @@
+:host {
+    display: block;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+
+    &__input {
+        appearance: none;
+        outline: none;
+        background: none;
+
+        &::-webkit-slider-runnable-track {
+            background-color: var(--color-secondary);
+            border-radius: 2rem;
+            border: 0.0625rem solid var(--color-border);
+
+            @include transition(border-color);
+        }
+
+        &::-moz-range-track {
+            background-color: var(--color-secondary);
+            border-radius: 2rem;
+            border: 0.0625rem solid var(--color-border);
+            min-height: 0.5rem;
+
+            @include transition(border-color);
+        }
+
+        &:focus-visible::-webkit-slider-runnable-track {
+            border-color: var(--color-outline);
+        }
+
+        &:focus-visible::-moz-range-track {
+            border-color: var(--color-outline);
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            appearance: none;
+            display: block;
+            cursor: pointer;
+            width: var(--slider-size, 1rem);
+            height: var(--slider-size, 1rem);
+            appearance: none;
+            border: none;
+            border-radius: 1rem;
+            background-color: var(--color-primary);
+
+            @include transition(background-color);
+
+            &:focus,
+            &:hover {
+                background-color: var(--color-primary-accent);
+            }
+        }
+    }
+
+    &__markers {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 0;
+        justify-content: space-between;
+
+        gap: 0.5rem;
+        user-select: none;
+        font-size: 0.75rem;
+        margin: 0 0.5rem;
+
+        > option {
+            padding: 0;
+            transform: translateX(-50%);
+            width: min-content;
+            position: relative;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                width: 0.0625rem;
+                height: 0.25rem;
+                top: -0.125rem;
+                left: 50%;
+                background-color: currentColor;
+            }
+        }
+    }
+}

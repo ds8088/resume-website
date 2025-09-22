@@ -1,0 +1,46 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--color-border);
+    padding: 0.5rem var(--page-padding);
+    font-size: 0.875rem;
+    border-top: 0.0625rem solid oklch(from var(--color-border) calc(l - 0.1 * var(--lightness-dir)) c h / alpha);
+
+    @include sm {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding-right: 0.375rem;
+    }
+
+    &__right {
+        > strong {
+            font-weight: 600;
+        }
+    }
+
+    &__url {
+        color: var(--color-text);
+
+        &:visited {
+            color: var(--color-text);
+        }
+    }
+
+    &__tooltip {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__tooltip-parent {
+        display: inline-flex;
+    }
+}

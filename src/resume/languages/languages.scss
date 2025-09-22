@@ -1,0 +1,33 @@
+:host {
+    padding: 0 var(--page-padding);
+}
+
+.languages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .language {
+        display: grid;
+        grid-template-columns: 0.5rem minmax(0, 1fr);
+        gap: 0.5rem;
+        margin-left: 0.5rem;
+
+        &::before {
+            content: '•';
+            display: inline-block;
+            grid-column: 1;
+            flex-shrink: 0;
+        }
+
+        & > * {
+            grid-column: 2;
+        }
+
+        &__tooltip {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+    }
+}
