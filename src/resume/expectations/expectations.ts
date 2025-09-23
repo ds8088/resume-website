@@ -162,11 +162,11 @@ export class ResumeExpectations extends LocalizableElement(CoreElement(styles)) 
                             <p slot="tooltip">
                                 ${this.locale.render({
                                     en: html`<p>
-                                        I&nbsp;am&nbsp;okay with an&nbsp;<i>occasional</i> office visit; however, the&nbsp;office
+                                        I&nbsp;am&nbsp;okay with an&nbsp;<em>occasional</em> office visit; however, the&nbsp;office
                                         must&nbsp;be&nbsp;located in&nbsp;Kirov city (Russia) or&nbsp;nearby environs.
                                     </p>`,
                                     ru: html`<p>
-                                        В&nbsp;городе Кирове <i>иногда</i> (при&nbsp;необходимости) могу&nbsp;работать из&nbsp;офиса.
+                                        В&nbsp;городе Кирове <em>иногда</em> (при&nbsp;необходимости) могу&nbsp;работать из&nbsp;офиса.
                                     </p>`,
                                 })}
                             </p>
