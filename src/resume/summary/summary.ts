@@ -3,7 +3,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
 import { CoreElement } from '../../core/element/element.ts';
-import type { ResumeTitle} from '../../controllers/titles.ts';
+import type { ResumeTitle } from '../../controllers/titles.ts';
 import { splitByTitleRelevancy, TitlesController } from '../../controllers/titles.ts';
 import { LocalizableElement } from '../../i18n/localizable.ts';
 import type { LanguageRecord } from '../../i18n/language.ts';
@@ -166,12 +166,14 @@ export class ResumeSummary extends LocalizableElement(CoreElement(styles)) {
                 ${this.localize({
                     en:
                         'An\u{a0}IT\u{a0}professional with a\u{a0}large field of\u{a0}expertise. Jack-\u{2060}of-\u{2060}all-\u{2060}trades ' +
-                        '(and a\u{a0}master of\u{a0}at\u{a0}least some). 15\u{a0}years of\u{a0}experience. ' +
-                        'Developed more\u{a0}than 50\u{a0}commercial projects across the\u{a0}last 5\u{a0}years. ' +
-                        'Modern, cutting-\u{2060}edge tech stack and\u{a0}first-\u{2060}class security approach.',
+                        '(and a\u{a0}master of\u{a0}at\u{a0}least some). 15\u{a0}years\u{a0}of experience, ' +
+                        'including 6\u{a0}years of\u{a0}commercial experience. ' +
+                        'Developed more\u{a0}than 50\u{a0}commercial projects at\u{a0}various scale. ' +
+                        'Modern, cutting-\u{2060}edge tech stack and\u{a0}a\u{a0}first-\u{2060}class security approach.',
                     ru:
                         'Универсальный IT-\u{2060}специалист с\u{a0}15-\u{2060}летним непрерывным опытом работы. ' +
-                        'За последние\u{a0}5\u{a0}лет реализовал более\u{a0}50 коммерческих проектов. ' +
+                        'В\u{a0}течение последних\u{a0}6\u{a0}лет занимаюсь коммерческой разработкой; ' +
+                        'реализовал более\u{a0}50 коммерческих проектов в\u{a0}различных масштабах. ' +
                         'Современный технологический стек и\u{a0}безопасность на\u{a0}первом месте.',
                 })}
             </p>
