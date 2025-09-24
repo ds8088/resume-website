@@ -1,8 +1,9 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    display: block;
     min-height: 100dvh;
+
+    // This should help with body background color leaking during the scroll bounce event.
+    background: linear-gradient(to bottom, var(--color-background) 50%, var(--color-border) 50%);
 
     --page-min-padding: 2rem;
     --page-width: min(1200px, 90dvw);
@@ -14,6 +15,15 @@
 }
 
 .app {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--color-background);
+
+    @include sm {
+        gap: 2.5rem;
+    }
+
     &__lower {
         display: flex;
         flex-direction: column;

@@ -9,6 +9,7 @@ import { Locale } from '../i18n/locale.ts';
 import type { LanguageID } from '../i18n/language.ts';
 import { loadFonts } from '../utils/font-loader.ts';
 
+import '../resume/legacy-bar/legacy-bar.ts';
 import '../resume/header/header.ts';
 import '../resume/contacts/contacts.ts';
 import '../resume/summary/summary.ts';
@@ -128,16 +129,20 @@ export class ResumeApp extends CoreElement(styles) {
 
     override render() {
         return html`
-            <resume-header></resume-header>
-            <resume-contacts></resume-contacts>
-            <resume-summary></resume-summary>
-            <resume-experience></resume-experience>
-            <resume-expectations></resume-expectations>
-            <resume-languages></resume-languages>
+            <resume-legacy-bar></resume-legacy-bar>
 
-            <div class="app__lower">
-                <resume-action></resume-action>
-                <resume-footer></resume-footer>
+            <div class="app">
+                <resume-header></resume-header>
+                <resume-contacts></resume-contacts>
+                <resume-summary></resume-summary>
+                <resume-experience></resume-experience>
+                <resume-expectations></resume-expectations>
+                <resume-languages></resume-languages>
+
+                <div class="app__lower">
+                    <resume-action></resume-action>
+                    <resume-footer></resume-footer>
+                </div>
             </div>
         `;
     }

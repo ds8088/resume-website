@@ -1,0 +1,26 @@
+:host(:not([open])) {
+    display: none;
+}
+
+:host {
+    position: sticky;
+    top: 0;
+}
+
+.legacy-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: var(--color-secondary);
+    padding: 0.5rem var(--page-padding);
+    font-size: 0.875rem;
+
+    &__tooltip {
+        display: inline-block;
+    }
+
+    &__feature {
+        font-weight: 500;
+    }
+}
