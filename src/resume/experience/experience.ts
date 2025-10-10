@@ -43,6 +43,7 @@ export class ResumeExperience extends LocalizableElement(CoreElement(styles)) {
                 ru: 'Инфраструктура и\u{a0}проекты с\u{a0}чистого листа; применение\u{a0}IT в качестве катализатора роста компании.',
             },
             startDate: new Temporal.PlainYearMonth(2023, 4, 'gregory'),
+            endDate: new Temporal.PlainYearMonth(2025, 10, 'gregory'),
             achievements: [
                 {
                     title: new Set(['backend', 'sysadmin', 'devops']),
