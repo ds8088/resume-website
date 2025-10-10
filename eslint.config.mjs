@@ -10,6 +10,15 @@ export default defineConfig(
     tseslint.configs.strictTypeChecked,
     tseslint.configs.stylisticTypeChecked,
     {
+        languageOptions: {
+            parserOptions: {
+                ecmaFeatures: {
+                    impliedStrict: true,
+                },
+                projectService: true,
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
         rules: {
             '@typescript-eslint/restrict-template-expressions': [
                 'error',
@@ -23,17 +32,6 @@ export default defineConfig(
             '@typescript-eslint/prefer-readonly': 'error',
             '@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
             '@typescript-eslint/promise-function-async': 'error',
-        },
-    },
-    {
-        languageOptions: {
-            parserOptions: {
-                ecmaFeatures: {
-                    impliedStrict: true,
-                },
-                projectService: true,
-                tsconfigRootDir: import.meta.dirname,
-            },
         },
     }
 );
