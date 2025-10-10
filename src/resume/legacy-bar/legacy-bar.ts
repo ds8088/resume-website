@@ -87,7 +87,10 @@ export class ResumeLegacyBar extends LocalizableElement(CoreElement(styles)) {
                                   })}
                                   ${repeat(
                                       this.unsupportedFeatures,
-                                      (e) => html`<strong class="legacy-bar__feature">${this.localize(e)}</strong>`
+                                      (e, i) =>
+                                          html`<strong class="legacy-bar__feature">
+                                              ${this.localize(e)}${i < this.unsupportedFeatures.length - 1 ? ',' : nothing}
+                                          </strong>`
                                   )}
                               </p> </cel-tooltip
                           >${this.localize({
