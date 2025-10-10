@@ -1,59 +1,108 @@
+@position-try --position-top-left {
+    inset: unset;
+    bottom: calc(anchor(top) + var(--tooltip-anchor-offset));
+    left: var(--page-padding);
+}
+
+@position-try --position-top-right {
+    inset: unset;
+    bottom: calc(anchor(top) + var(--tooltip-anchor-offset));
+    right: var(--page-padding);
+}
+
+@position-try --position-bottom-left {
+    inset: unset;
+    top: calc(anchor(bottom) + var(--tooltip-anchor-offset));
+    left: var(--page-padding);
+}
+
+@position-try --position-bottom-right {
+    inset: unset;
+    top: calc(anchor(bottom) + var(--tooltip-anchor-offset));
+    right: var(--page-padding);
+}
+
 .tooltip {
-    --tooltip-transition-duration-coalesced: var(--tooltip-transition-duration, 0.3s);
+    display: contents;
 
-    background-color: var(--color-background);
-    padding: 0.25rem 0.5rem;
-    border: 0.0625rem solid var(--color-border);
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: normal;
-    box-shadow: 0.125rem 0.125rem 0.25rem -0.125rem var(--color-shadow);
-    position: fixed;
-    max-width: var(--page-width);
-    width: max-content;
-    margin: 0;
-
-    opacity: 0;
-    visibility: hidden;
-    outline: 0.125rem solid transparent;
-
-    top: 0;
-    left: 0;
-    will-change: top, left, opacity, visibility;
-
-    @include transition-discrete(
-        opacity visibility display overlay outline-color,
-        var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
-            var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
-            var(--tooltip-transition-duration-coalesced)
-    );
-
-    &:focus-within {
-        outline-color: var(--color-outline);
+    &_underline .tooltip__element {
+        text-decoration-style: dashed;
+        text-decoration-line: underline;
+        text-decoration-skip-ink: none;
+        text-underline-position: under;
+        text-decoration-thickness: 0.0625rem;
+        text-decoration-color: var(--color-tooltip-underline);
     }
 
-    &_active {
+    &_anchor .tooltip__element {
+        anchor-name: var(--tooltip-anchor-name);
+    }
+
+    &_simple .tooltip__content {
+        max-width: min(400px, var(--page-width));
+    }
+
+    &_active .tooltip__content {
         opacity: 1;
         visibility: visible;
     }
 
-    &_simple {
-        max-width: min(400px, var(--page-width));
+    &_anchor .tooltip__content {
+        inset: unset;
+        will-change: inset, opacity, visibility;
+
+        position-anchor: var(--tooltip-anchor-name);
+        bottom: calc(anchor(top) + var(--tooltip-anchor-offset));
+        left: anchor(left);
+
+        position-try-fallbacks: flip-block, flip-inline, --position-top-left, --position-top-right, --position-bottom-left,
+            --position-bottom-right;
     }
 
-    &__parent {
+    &_anchor-bottom .tooltip__content {
+        position-try-fallbacks: flip-block, flip-inline, --position-bottom-left, --position-bottom-right, --position-top-left,
+            --position-top-right;
+    }
+
+    &__element {
         display: inline-flex;
         cursor: help;
 
         @include outline(0.0625rem);
+    }
 
-        &_underline {
-            text-decoration-style: dashed;
-            text-decoration-line: underline;
-            text-decoration-skip-ink: none;
-            text-underline-position: under;
-            text-decoration-thickness: 0.0625rem;
-            text-decoration-color: var(--color-tooltip-underline);
+    &__content {
+        --tooltip-transition-duration-coalesced: var(--tooltip-transition-duration, 0.3s);
+
+        background-color: var(--color-background);
+        padding: 0.25rem 0.5rem;
+        border: 0.0625rem solid var(--color-border);
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: normal;
+        box-shadow: 0.125rem 0.125rem 0.25rem -0.125rem var(--color-shadow);
+        position: fixed;
+        max-width: var(--page-width);
+        width: max-content;
+        margin: 0;
+
+        opacity: 0;
+        visibility: hidden;
+        outline: 0.125rem solid transparent;
+
+        top: 0;
+        left: 0;
+        will-change: top, left, opacity, visibility;
+
+        @include transition-discrete(
+            opacity visibility display overlay outline-color,
+            var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
+                var(--tooltip-transition-duration-coalesced) var(--tooltip-transition-duration-coalesced)
+                var(--tooltip-transition-duration-coalesced)
+        );
+
+        &:focus-within {
+            outline-color: var(--color-outline);
         }
     }
 }

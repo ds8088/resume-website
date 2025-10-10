@@ -1,19 +1,21 @@
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { Ref } from 'lit/directives/ref.js';
-import { createRef, ref } from 'lit/directives/ref.js';
+import { createRef, ref, type Ref } from 'lit/directives/ref.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import type { Placement } from '@floating-ui/dom';
-import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip, offset, shift, type Placement } from '@floating-ui/dom';
 
 import { CoreElement } from '../../core/element/element.ts';
 import { CoreEvent } from '../../core/events.ts';
 
 import styles from './cel-tooltip.scss?inline';
+import { randomString } from '../../utils/random.ts';
 
 @customElement('cel-tooltip')
 export class CelTooltip extends CoreElement(styles) {
+    private static hasAnchorSupport?: boolean;
+    private static anchorID = 0;
+
     @property({ type: Number }) showDelay = 200;
     @property({ type: Number }) hideDelay = 200;
     @property({ type: Number }) transitionDuration = 300;
@@ -30,6 +32,23 @@ export class CelTooltip extends CoreElement(styles) {
     private timerID?: number;
     private deferredEventTimerID?: number;
     private readonly activationMethods = new Set<'pointer' | 'focus' | 'tooltip'>();
+    private readonly anchorName: string = '';
+
+    constructor() {
+        super();
+        CelTooltip.hasAnchorSupport ??=
+            CSS.supports('anchor-name', '--tooltip-anchor-name') &&
+            CSS.supports('position-try-fallbacks', 'flip-block flip-inline') &&
+            CSS.supports('position-area', 'top span-left');
+
+        if (CelTooltip.hasAnchorSupport) {
+            this.anchorName = `--${randomString(24)}-${++CelTooltip.anchorID}`;
+        }
+    }
+
+    private get hasAnchorSupport() {
+        return CelTooltip.hasAnchorSupport === true;
+    }
 
     private readonly showTooltip = async () => {
         await this.updatePosition();
@@ -105,7 +124,7 @@ export class CelTooltip extends CoreElement(styles) {
     private floatingUICleanup?: () => void;
 
     private readonly updatePosition = async () => {
-        if (this.contentRef.value && this.tooltipRef.value) {
+        if (this.contentRef.value && this.tooltipRef.value && !this.hasAnchorSupport) {
             const pos = await computePosition(this.contentRef.value, this.tooltipRef.value, {
                 strategy: 'fixed',
                 placement: this.placement,
@@ -129,13 +148,6 @@ export class CelTooltip extends CoreElement(styles) {
         }
     };
 
-    override disconnectedCallback(): void {
-        this.clearTimer();
-        this.teardownAutoUpdate();
-
-        super.disconnectedCallback();
-    }
-
     private teardownAutoUpdate() {
         if (this.floatingUICleanup) {
             this.floatingUICleanup();
@@ -144,45 +156,62 @@ export class CelTooltip extends CoreElement(styles) {
     }
 
     private setupAutoUpdate() {
-        if (this.contentRef.value && this.tooltipRef.value) {
+        if (this.contentRef.value && this.tooltipRef.value && !this.hasAnchorSupport) {
             this.teardownAutoUpdate();
             this.floatingUICleanup = autoUpdate(this.contentRef.value, this.tooltipRef.value, this.updatePosition as () => void);
         }
     }
 
+    override disconnectedCallback(): void {
+        this.clearTimer();
+        this.teardownAutoUpdate();
+
+        super.disconnectedCallback();
+    }
+
     override render() {
         return html`
             <div
-                ${ref(this.contentRef)}
-                class=${classMap({
-                    tooltip__parent: true,
-                    tooltip__parent_underline: this.underline,
-                })}
-                @mouseover=${this.activate('pointer')}
-                @mouseout=${this.deactivate('pointer')}
-                @focus=${this.activate('focus')}
-                @blur=${this.deactivate('focus')}
-                tabindex="0"
-            >
-                <slot></slot>
-            </div>
-
-            <div
-                ${ref(this.tooltipRef)}
                 class=${classMap({
                     tooltip: true,
-                    tooltip_active: this.tooltipActive,
                     tooltip_simple: this.simple,
+                    tooltip_underline: this.underline,
+                    tooltip_anchor: this.hasAnchorSupport,
+                    tooltip_active: this.tooltipActive,
+                    'tooltip_anchor-bottom': ['bottom', 'bottom-start', 'bottom-end'].includes(this.placement),
                 })}
-                style=${styleMap({ '--tooltip-transition-duration': `${this.transitionDuration}ms` })}
-                @mouseover=${this.activate('tooltip')}
-                @mouseout=${this.deactivate('tooltip')}
-                @focusin=${this.activate('focus')}
-                @focusout=${this.deactivate('focus')}
-                popover="manual"
-                tabindex="0"
+                style=${styleMap({
+                    '--tooltip-transition-duration': `${this.transitionDuration}ms`,
+                    ...(this.hasAnchorSupport && {
+                        '--tooltip-anchor-name': this.anchorName,
+                        '--tooltip-anchor-offset': `${this.offset}px`,
+                    }),
+                })}
             >
-                <slot name="tooltip"></slot>
+                <div
+                    class="tooltip__element"
+                    ${ref(this.contentRef)}
+                    @mouseover=${this.activate('pointer')}
+                    @mouseout=${this.deactivate('pointer')}
+                    @focus=${this.activate('focus')}
+                    @blur=${this.deactivate('focus')}
+                    tabindex="0"
+                >
+                    <slot></slot>
+                </div>
+
+                <div
+                    ${ref(this.tooltipRef)}
+                    class="tooltip__content"
+                    @mouseover=${this.activate('tooltip')}
+                    @mouseout=${this.deactivate('tooltip')}
+                    @focusin=${this.activate('focus')}
+                    @focusout=${this.deactivate('focus')}
+                    popover="manual"
+                    tabindex="0"
+                >
+                    <slot name="tooltip"></slot>
+                </div>
             </div>
         `;
     }
