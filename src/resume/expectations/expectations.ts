@@ -94,7 +94,7 @@ export class ResumeExpectations extends LocalizableElement(CoreElement(styles)) 
                                             'by\u{a0}using the\u{a0}slider below:',
                                         ru:
                                             'Если ваш\u{a0}проект или\u{a0}рабочий график подразумевает меньше часов в\u{a0}неделю, то\u{a0}можете посчитать, ' +
-                                            'какая\u{a0}ЗП будет \u{a0}меня комфортной:',
+                                            'какая\u{a0}ЗП будет для\u{a0}меня комфортной:',
                                     })}
                                 </p>
 
