@@ -71,9 +71,9 @@ export class CelSlider extends CoreElement(styles) {
                     min=${this.min}
                     max=${this.max}
                     step=${this.step}
-                    .value=${this.getValue()}
+                    .valueAsNumber=${this.getValue()}
                     @input="${this.onInput}"
-                    list=${this.hasTicks ? 'markers' : nothing}
+                    list=${this.hasTicks ? 'markers' : typeof nothing}
                 />
 
                 ${this.hasTicks
