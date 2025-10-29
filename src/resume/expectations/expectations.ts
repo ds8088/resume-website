@@ -15,7 +15,7 @@ import styles from './expectations.scss?inline';
 export class ResumeExpectations extends LocalizableElement(CoreElement(styles)) {
     @state() private weeklyHours = 40;
 
-    private readonly expectedProfit = 200000; // Hey, that's below market rate anyway.
+    private readonly expectedProfit = 250000; // That seems reasonable, right?
 
     private formatProfit(profitRUR: number) {
         const conversionRate = 1 / 80; // At least for the time being that would be good enough.
