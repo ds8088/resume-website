@@ -15,16 +15,16 @@
     "temporal-polyfill": "0.3.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.37.0",
+    "@eslint/js": "9.38.0",
     "@literals/rollup-plugin-html-css-minifier": "3.0.1",
-    "@types/web": "0.0.276",
+    "@types/web": "0.0.285",
     "autoprefixer": "10.4.21",
-    "eslint": "9.37.0",
+    "eslint": "9.38.0",
     "postcss": "8.5.6",
     "sass-embedded": "1.93.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.0",
-    "vite": "7.1.9",
+    "typescript-eslint": "8.46.2",
+    "vite": "7.1.12",
     "vite-plugin-minify": "2.1.0"
   }
 }
