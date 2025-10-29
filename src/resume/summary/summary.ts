@@ -192,16 +192,8 @@ export class ResumeSummary extends LocalizableElement(CoreElement(styles)) {
 
             <p>
                 ${this.localize({
-                    en: 'Currently looking for\u{a0}work, preferably a\u{a0}full-\u{2060}time position.',
-                    ru: 'На\u{a0}данный момент нахожусь в\u{a0}активном поиске работы.',
-                })}
-            </p>
-            <p>
-                ${this.localize({
-                    en:
-                        'Seeking for\u{a0}a\u{a0}role that aligns\u{a0}well with my\u{a0}skills and\u{a0}offers opportunities ' +
-                        'to\u{a0}enhance\u{a0}them even\u{a0}more.',
-                    ru: 'Ищу такую работу, где\u{a0}можно было\u{a0}бы успешно применить и\u{a0}усилить мои\u{a0}знания.',
+                    en: "Currently I'm\u{a0}not\u{a0}seeking any employment opportunities.",
+                    ru: 'На\u{a0}данный момент не\u{a0}нахожусь в\u{a0}поиске работы.',
                 })}
             </p>
         </resume-section>`;
