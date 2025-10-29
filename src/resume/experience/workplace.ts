@@ -193,7 +193,7 @@ export class ResumeWorkplace extends LocalizableElement(CoreElement(styles)) {
             // The disclosure hasn't been opened. Show a disclosure element.
 
             const plur = this.locale.pluralize(nonRelevantAchievements.length, {
-                en: ['achievements', 'achievements', 'achievements'],
+                en: ['achievement', 'achievements', 'achievements'],
                 ru: ['достижение', 'достижения', 'достижений'],
             });
 
@@ -266,7 +266,7 @@ export class ResumeWorkplace extends LocalizableElement(CoreElement(styles)) {
                 }
 
                 const plur = this.locale.pluralize(remaining, {
-                    en: ['achievements', 'achievements', 'achievements'],
+                    en: ['achievement', 'achievements', 'achievements'],
                     ru: ['достижение', 'достижения', 'достижений'],
                 });
 
