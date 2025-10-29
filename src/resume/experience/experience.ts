@@ -648,16 +648,20 @@ export class ResumeExperience extends LocalizableElement(CoreElement(styles)) {
         },
     ];
 
-    private translateOptional(s: string | LanguageRecord<string> | undefined): string | undefined {
-        if (s === undefined) {
-            return undefined;
-        }
-
+    private translateMandatory(s: string | LanguageRecord<string>): string {
         if (typeof s === 'string') {
             return s;
         }
 
         return this.localize(s);
+    }
+
+    private translateOptional(s: string | LanguageRecord<string> | undefined): string | undefined {
+        if (s === undefined) {
+            return undefined;
+        }
+
+        return this.translateMandatory(s);
     }
 
     private getTotalWorkDuration(): Temporal.Duration {
@@ -710,14 +714,14 @@ export class ResumeExperience extends LocalizableElement(CoreElement(styles)) {
                             <li class="workplace">
                                 <resume-workplace
                                     class="workplace__info"
-                                    .jobTitle=${this.translateOptional(workplace.jobTitle)}
+                                    .jobTitle=${this.translateMandatory(workplace.jobTitle)}
                                     .companyName=${this.translateOptional(workplace.companyName)}
                                     .companyURL=${workplace.companyURL}
                                     .subtitle=${this.translateOptional(workplace.subtitle)}
                                     .startDate=${workplace.startDate}
                                     .endDate=${workplace.endDate}
                                     .achievements=${workplace.achievements}
-                                    .indexes=${[this.experience.length - index, this.experience.length]}
+                                    .indexes=${[this.experience.length - index, this.experience.length] as const}
                                 ></resume-workplace>
                             </li>
                         `
