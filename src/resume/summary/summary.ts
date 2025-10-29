@@ -13,6 +13,7 @@ import '../../components/cel-button/cel-button.ts';
 import '../../components/cel-svg/cel-svg.ts';
 
 import styles from './summary.scss?inline';
+import { pluralizeYoE, totalCommercialYoE, totalYoE } from '../../utils/yoe.ts';
 
 interface Skill {
     title: ResumeTitle | Set<ResumeTitle>;
@@ -166,13 +167,22 @@ export class ResumeSummary extends LocalizableElement(CoreElement(styles)) {
                 ${this.localize({
                     en:
                         'An\u{a0}IT\u{a0}professional with a\u{a0}large field of\u{a0}expertise. Jack-\u{2060}of-\u{2060}all-\u{2060}trades ' +
-                        '(and a\u{a0}master of\u{a0}at\u{a0}least some). 15\u{a0}years\u{a0}of experience, ' +
-                        'including 6\u{a0}years of\u{a0}commercial experience. ' +
+                        `(and a\u{a0}master of\u{a0}at\u{a0}least some). ${totalYoE}\u{a0}${pluralizeYoE(
+                            totalYoE,
+                            this.locale
+                        )}\u{a0}of experience, ` +
+                        `including ${totalCommercialYoE}\u{a0}${pluralizeYoE(
+                            totalCommercialYoE,
+                            this.locale
+                        )} of\u{a0}commercial experience. ` +
                         'Developed more\u{a0}than 50\u{a0}commercial projects at\u{a0}various scale. ' +
                         'Modern, cutting-\u{2060}edge tech stack and\u{a0}a\u{a0}first-\u{2060}class security approach.',
                     ru:
-                        'Универсальный IT-\u{2060}специалист с\u{a0}15-\u{2060}летним непрерывным опытом работы. ' +
-                        'В\u{a0}течение последних\u{a0}6\u{a0}лет занимаюсь коммерческой разработкой; ' +
+                        `Универсальный IT-\u{2060}специалист с\u{a0}${totalYoE}-\u{2060}летним непрерывным опытом работы. ` +
+                        `В\u{a0}течение последних\u{a0}${totalCommercialYoE}\u{a0}${pluralizeYoE(
+                            totalCommercialYoE,
+                            this.locale
+                        )} занимаюсь коммерческой разработкой; ` +
                         'реализовал более\u{a0}50 коммерческих проектов в\u{a0}различных масштабах. ' +
                         'Современный технологический стек и\u{a0}безопасность на\u{a0}первом месте.',
                 })}

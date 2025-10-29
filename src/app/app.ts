@@ -8,6 +8,7 @@ import { TitlesController } from '../controllers/titles.ts';
 import { Locale } from '../i18n/locale.ts';
 import type { LanguageID } from '../i18n/language.ts';
 import { loadFonts } from '../utils/font-loader.ts';
+import { pluralizeYoE, totalYoE } from '../utils/yoe.ts';
 
 import '../resume/legacy-bar/legacy-bar.ts';
 import '../resume/header/header.ts';
@@ -70,8 +71,8 @@ export class ResumeApp extends CoreElement(styles) {
         });
 
         const description = locale.translate({
-            en: 'CV of an IT specialist: 15 years of experience and more than 50 commercial projects.',
-            ru: 'Резюме IT-специалиста: 15 лет опыта и более 50 коммерческих проектов.',
+            en: `CV of an IT specialist: ${totalYoE} ${pluralizeYoE(totalYoE, locale)} of experience and more than 50 commercial projects.`,
+            ru: `Резюме IT-специалиста: ${totalYoE} ${pluralizeYoE(totalYoE, locale)} опыта и более 50 коммерческих проектов.`,
         });
 
         document.title = title;
