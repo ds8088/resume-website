@@ -18,7 +18,7 @@ import styles from './header.scss?inline';
 
 @customElement('resume-header')
 export class ResumeHeader extends LocalizableElement(CoreElement(styles)) {
-    @state() selectedTitles = new Set<ResumeTitle>();
+    @state() private readonly selectedTitles = new Set<ResumeTitle>();
 
     private readonly setTitleState = (title: ResumeTitle, state: boolean) => {
         if (state) {

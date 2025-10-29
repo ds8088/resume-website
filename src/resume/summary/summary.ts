@@ -23,7 +23,7 @@ interface Skill {
 
 @customElement('resume-summary')
 export class ResumeSummary extends LocalizableElement(CoreElement(styles)) {
-    @state() nonRelevantSkillsShown = false;
+    @state() private nonRelevantSkillsShown = false;
 
     private readonly titlesConsumer = TitlesController.attachConsumer(this, () => {
         this.nonRelevantSkillsShown = false;

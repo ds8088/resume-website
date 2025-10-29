@@ -12,7 +12,7 @@ import styles from './languages.scss?inline';
 
 @customElement('resume-languages')
 export class ResumeLanguages extends LocalizableElement(CoreElement(styles)) {
-    @state() afterSwitchShown = false;
+    @state() private afterSwitchShown = false;
 
     override render() {
         return html`<resume-section
@@ -37,6 +37,7 @@ export class ResumeLanguages extends LocalizableElement(CoreElement(styles)) {
                         })}
                     </span>
                 </li>
+
                 <li class="language">
                     <span>
                         <strong>

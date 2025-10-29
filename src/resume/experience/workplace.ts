@@ -27,8 +27,8 @@ export class ResumeWorkplace extends LocalizableElement(CoreElement(styles)) {
     @property({ attribute: false }) achievements: Achievement[] = [];
     @property({ attribute: false }) indexes?: [number, number];
 
-    @state() relevantAchievementsShown = false;
-    @state() nonRelevantAchievementsShown = false;
+    @state() private relevantAchievementsShown = false;
+    @state() private nonRelevantAchievementsShown = false;
 
     private readonly titlesConsumer = TitlesController.attachConsumer(this, () => {
         // Collapse disclosures if titles have been changed
