@@ -8,7 +8,7 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
     "skipLibCheck": true,
 
-    "types": ["vite/client", "web"],
+    "types": ["vite/client", "bun", "web"],
 
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,

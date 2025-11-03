@@ -53,8 +53,13 @@ export default {
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: ['@use "/css/vars" as *;', '@use "/css/mixins" as *;'].join('\n'),
+                additionalData: ['@use "@/css/vars" as *;', '@use "@/css/mixins" as *;'].join('\n'),
             },
+        },
+    },
+    resolve: {
+        alias: {
+            '@': Bun.fileURLToPath(new URL('.', import.meta.url)),
         },
     },
 } satisfies UserConfig;
