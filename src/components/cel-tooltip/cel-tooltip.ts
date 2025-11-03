@@ -72,7 +72,7 @@ export class CelTooltip extends CoreElement(styles) {
         // Add 100ms to the duration to account for CSS/JS timeout discrepancies.
         this.deferredEventTimerID = setTimeout(() => {
             this.dispatchEvent(new CoreEvent('tooltip-hide'));
-        }, this.transitionDuration + 100);
+        }, this.transitionDuration + 100) as never;
     };
 
     private readonly clearTimer = () => {
@@ -94,7 +94,7 @@ export class CelTooltip extends CoreElement(styles) {
         this.timerID = setTimeout(() => {
             void this.showTooltip();
             this.timerID = undefined;
-        }, this.showDelay);
+        }, this.showDelay) as never;
     };
 
     private readonly deactivate = (method: typeof this.activationMethods extends Set<infer T> ? T : never) => () => {
@@ -117,7 +117,7 @@ export class CelTooltip extends CoreElement(styles) {
             this.timerID = setTimeout(() => {
                 this.hideTooltip();
                 this.timerID = undefined;
-            }, delay);
+            }, delay) as never;
         }
     };
 
