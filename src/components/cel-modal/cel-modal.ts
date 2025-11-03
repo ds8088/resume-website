@@ -1,7 +1,7 @@
 import type { PropertyValues } from 'lit';
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { Ref} from 'lit/directives/ref.js';
+import type { Ref } from 'lit/directives/ref.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -128,7 +128,7 @@ export class CelModal extends LocalizableElement(CoreElement(styles)) {
         return html`
             <dialog
                 ${ref(this.dialogRef)}
-                popover
+                popover="auto"
                 class=${classMap({ modal: true, modal_overlay: !this.noOverlay })}
                 style="${styleMap({
                     width: this.modalWidth.toFixed(0) + 'px',
