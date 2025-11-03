@@ -27,5 +27,8 @@
     "typescript-eslint": "8.46.2",
     "vite": "7.1.12",
     "vite-plugin-minify": "2.1.0"
+  },
+  "overrides": {
+    "eslint": "9.38.0"
   }
 }
