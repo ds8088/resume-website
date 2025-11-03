@@ -101,9 +101,10 @@ export class ResumeExpectations extends LocalizableElement(CoreElement(styles)) 
                                 <div class="profit-info__calc">
                                     <strong class="profit-info__hours">
                                         ${this.localize({
-                                            en: 'Hours:',
-                                            ru: 'Часы:',
+                                            en: 'Hours',
+                                            ru: 'Часы',
                                         })}
+                                        ${`(${this.weeklyHours}):`}
                                     </strong>
                                     <cel-slider
                                         class="profit-info__slider"
